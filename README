@@ -1,0 +1,110 @@
+xml-emitter: An XML emitter
+===========================
+
+Often, programs have to generate XML output. This is fairly easy, but
+not quite trivial. You need to do escaping, and indentation can be a
+little tricky to keep track of. One approach you could use is to get
+an XML parser/unparser like XMLS, build your XML data structure in
+memory, then dump the whole thing. This is fairly easy, but not as
+easy as it could be, and it requires holding the whole structure in
+memory. Oh, and XMLS doesn't handle indentation for you.
+
+So, I wrote xml-emitter. xml-emitter simply emits XML, with some
+complexity for handling indentation. It can be used to produce all
+sorts of useful XML output; it has an RSS 2.0 emitter built in.
+
+There is no real home page, but you can download it from the
+asdf-packaging project:
+
+http://common-lisp.net/project/asdf-packaging/
+
+If you have comments, questions, or bug reports, email them to Peter
+Scott <pscott@common-lisp.net>.
+
+Installation
+------------
+
+There are two ways to install xml-emitter. Via asdf-install:
+
+(asdf-install:install :xml-emitter)
+
+Or you can download the latest version at:
+
+http://common-lisp.net/project/asdf-packaging/xml-emitter-latest.tar.gz
+
+Usage
+-----
+
+The WITH-XML-OUTPUT macro wraps all XML output to a stream.
+
+The WITH-TAG macro places the XML produced by its body inside a
+tag. Its output cannot be on just one line, since it puts starting and
+closing tags on their own lines.
+
+The WITH-SIMPLE-TAG macro is like WITH-TAG, but starting and closing
+tags don't get their own lines.
+
+XML-OUT prints its argument to the XML output stream, escaped.
+
+XML-AS-IS prints its argument to the XML output stream, unescaped.
+
+SIMPLE-TAG prints a simple <tag>value</tag> tag. It's a shortened
+version of a typical use of WITH-SIMPLE-TAG and XML-OUT.
+
+EMIT-SIMPLE-TAGS takes a plist of tag names and tag values. For every
+tag with a non-NIL value, it prints the tag with SIMPLE-TAG. Tag names
+given as keyword symbols (like :this) are downcased.
+
+Example:
+
+(with-xml-output (*standard-output*)
+  (with-tag ("person" '(("age" "19")))
+    (with-simple-tag ("firstName")
+      (xml-out "Peter"))
+    (simple-tag "lastName" "Scott")
+    (emit-simple-tags :age 17
+		      :school "Iowa State Univeristy"
+		      "mixedCaseTag" "Check out the mixed case!"
+		      "notShown" nil)))
+
+The RSS 2.0 emitter
+-------------------
+
+The WITH-RSS2 macro wraps up all output of RSS.
+
+RSS-CHANNEL-HEADER outputs the RSS channel information.
+
+RSS-ITEM outputs information about one RSS item.
+
+Example:
+
+(with-rss2 (*standard-output*)
+  (rss-channel-header "Peter's Blog" "http://peter.blogspot.com/"
+		      :description "A place where I sometimes post stuff"
+		      :image "myhead.jpg"
+		      :image-title "My glorious visage")
+  (rss-item "Breaking news!"
+	    :link "http://google.com/"
+	    :description "The biggest problem with the DO-ODD macro above is that it puts BODY
+into LOOP. Code from the user of the macro should never be run in the
+environment established by the LOOP macro. LOOP does a number of
+things behind your back, and it's hard to disable them. For example,
+what happens here?"
+	    :author "Peter Scott"
+	    :category "Lisp"
+	    :pubDate "Sun, 29 Sep 2002 19:59:01 GMT")
+  (rss-item "RSS emitter created"
+	    :description "An RSS emitter has been released! Hahahahaha!"
+	    :author "Peter Scott"
+	    :link "http://gmail.google.com/"))
+
+There is also a complete example of how you might use the RSS emitter
+in mailbox.lisp
+
+License
+-------
+
+I, Peter Scott, place this code in the public domain. You can do
+whatever you like with it.
+
+-Peter Scott, <pscott@common-lisp.net>
