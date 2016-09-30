@@ -6,7 +6,7 @@
 (in-package #:xml-emitter-system)
 
 (defsystem xml-emitter
-  :author "Vito Van / Peter Scott"
+  :author "Peter Scott / Vito Van / Philipp Marek"
   :version "1.0.4"
   :licence "Public Domain / 0-clause MIT"
   :serial t
