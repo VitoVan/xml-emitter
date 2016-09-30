@@ -70,7 +70,7 @@
   (when indent (indent))
   (format *xml-output-stream* "~A" x))
 
-(defun start-tag (name &optional attrs namespace)
+(defun start-tag (name &optional attrs namespace end-it)
   "Write a start tag to XML output"
   (indent)
   (format *xml-output-stream* "<~A~@[ xmlns=\"~A\"~]"
@@ -81,7 +81,12 @@
     (write-string "=\"" *xml-output-stream*)
     (xml-out (second attr) :indent nil)
     (write-char #\" *xml-output-stream*))
+  (if end-it
+    (write-char #\/ *xml-output-stream*))
   (write-char #\> *xml-output-stream*))
+
+(defun empty-tag (name &optional attrs namespace)
+  (start-tag name attrs namespace T))
 
 (defun end-tag (name)
   "Write en ending tag to XML output"
