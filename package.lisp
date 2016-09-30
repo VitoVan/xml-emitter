@@ -8,6 +8,7 @@
 	   #:with-simple-tag
 	   #:with-xml-output
 	   #:simple-tag
+	   #:empty-tag
 	   #:emit-simple-tags
 	   ;; RSS 2.0
 	   #:rss-channel-header
