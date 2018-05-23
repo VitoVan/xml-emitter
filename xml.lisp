@@ -118,11 +118,11 @@
 	,@body
 	(end-tag ,name)))))
 
-(defmacro with-xml-output ((stream &key (encoding "ISO-8859-1")) &body body)
+(defmacro with-xml-output ((stream &key (encoding "ISO-8859-1") (standalone nil standalone-p)) &body body)
   "Wrap XML output on STREAM with the necessary XML heading information"
   `(let ((*xml-output-stream* ,stream))
-     (format *xml-output-stream* "<?xml version=\"1.0\" encoding=~S?>~%"
- 	     ,encoding)
+     (format *xml-output-stream* "<?xml version=\"1.0\" encoding=~S~:[~; standalone=\"~:[no~;yes~]\"~]?>~%"
+	     ,encoding ,standalone-p ,standalone)
      ,@body))
 
 (defun simple-tag (name content &optional attrs namespace)
