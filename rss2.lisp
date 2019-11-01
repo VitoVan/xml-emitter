@@ -7,7 +7,9 @@
 (in-package :xml-emitter)
 
 (defun rss-channel-header (title link &key description (language "en-us")
-		       image image-title image-link)
+		       self image image-title image-link)
+  (when self
+    (empty-tag "atom:link" `(("href" ,self) ("rel" "self") ("type" "application/rss+xml"))))
   (emit-simple-tags :title title
 		    :link link
 		    :description description
