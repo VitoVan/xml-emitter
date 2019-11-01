@@ -13,4 +13,5 @@
 	   ;; RSS 2.0
 	   #:rss-channel-header
 	   #:rss-item
-	   #:with-rss2))
+	   #:with-rss2
+	   #:with-rss2-atom))
