@@ -29,8 +29,8 @@
 		      :comments comments
 		      "pubDate" pubDate
 		      :source source)
-   (when guid
-     (simple-tag "guid" guid (unless guidIsPermalink '(("isPermaLink" "false")))))))
+    (when guid
+      (simple-tag "guid" guid (unless guidIsPermalink '(("isPermaLink" "false")))))))
 
 (defmacro with-rss2 ((stream &key (encoding "ISO-8859-1")) &body body)
   `(with-xml-output (,stream :encoding ,encoding)
