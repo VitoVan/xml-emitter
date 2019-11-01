@@ -39,6 +39,12 @@
        (with-tag ("channel")
 	 ,@body))))
 
+(defmacro with-rss2-atom ((stream &key (encoding "ISO-8859-1")) &body body)
+  `(with-xml-output (,stream :encoding ,encoding)
+     (with-tag ("rss" '(("xmlns:atom" "http://www.w3.org/2005/Atom") ("version" "2.0")))
+       (with-tag ("channel")
+	 ,@body))))
+
 ;; This sample RSS feed demonstrates how to use the RSS emitter. As
 ;; you can see, you can use a fairly decent subset of RSS with
 ;; relative ease.
