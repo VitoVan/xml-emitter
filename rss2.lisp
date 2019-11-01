@@ -19,7 +19,7 @@
 			:link (or image-link link)))))
 
 (defun rss-item (title &key link description author category
-		 comments guid pubDate source)
+		 comments guid (guidIsPermalink T) pubDate source)
   (with-tag ("item")
     (emit-simple-tags :title title
 		      :link link
@@ -27,9 +27,10 @@
 		      :author author
 		      :category category
 		      :comments comments
-		      :guid guid
 		      "pubDate" pubDate
-		      :source source)))
+		      :source source)
+   (when guid
+     (simple-tag "guid" guid (unless guidIsPermalink '(("isPermaLink" "false")))))))
 
 (defmacro with-rss2 ((stream &key (encoding "ISO-8859-1")) &body body)
   `(with-xml-output (,stream :encoding ,encoding)
