@@ -6,11 +6,12 @@
 
 (in-package :xml-emitter)
 
-(defun rss-channel-header (title link &key description (language "en-us")
+(defun rss-channel-header (title link &key description (generator "xml-emitter") (language "en-us")
 		       image image-title image-link)
   (emit-simple-tags :title title
 		    :link link
 		    :description description
+		    :generator generator
 		    :language language)
   (when image
     (with-tag ("image")
