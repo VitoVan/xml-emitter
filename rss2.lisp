@@ -18,6 +18,24 @@
 			:url image
 			:link (or image-link link)))))
 
+(defmacro with-rss-channel-header ((title link &key description
+                                          (generator "xml-emitter")
+                                          (language "en-us")
+                                          image image-title image-link)
+                                   &body body)
+  `(progn
+     (emit-simple-tags :title ,title
+                       :link ,link
+                       :description ,description
+                       :generator ,generator
+                       :language ,language)
+     (when ,image
+       (with-tag ("image")
+         (emit-simple-tags :title (or ,image-title ,title)
+                           :url ,image
+                           :link (or ,image-link ,link))))
+     ,@body))
+
 (defun rss-item (title &key link description author category
 		 comments guid pubDate source)
   (with-tag ("item")
@@ -30,6 +48,21 @@
 		      :guid guid
 		      "pubDate" pubDate
 		      :source source)))
+
+(defmacro with-rss-item ((title &key link description author category
+                                comments guid pubDate source)
+                         &body body)
+  `(with-tag ("item")
+     (emit-simple-tags :title ,title
+                       :link ,link
+                       :description ,description
+                       :author ,author
+                       :category ,category
+                       :comments ,comments
+                       :guid ,guid
+                       "pubDate" ,pubDate
+                       :source ,source)
+     ,@body))
 
 (defmacro with-rss2 ((stream &key (encoding "ISO-8859-1")) &body body)
   `(with-xml-output (,stream :encoding ,encoding)
