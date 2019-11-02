@@ -86,6 +86,7 @@
   (write-char #\> *xml-output-stream*))
 
 (defun empty-tag (name &optional attrs namespace)
+  (fresh-line *xml-output-stream*)
   (start-tag name attrs namespace T))
 
 (defun end-tag (name)
