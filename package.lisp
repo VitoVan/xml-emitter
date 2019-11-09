@@ -12,5 +12,7 @@
 	   #:emit-simple-tags
 	   ;; RSS 2.0
 	   #:rss-channel-header
+	   #:with-rss-channel-header
 	   #:rss-item
+	   #:with-rss-item
 	   #:with-rss2))
