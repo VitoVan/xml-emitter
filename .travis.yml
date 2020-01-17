@@ -1,4 +1,5 @@
 language: generic
+os: linux
 
 env:
   global:
@@ -7,7 +8,7 @@ env:
     - ROSWELL_VERSION=19.12.13.103
     - ROSWELL_URL="https://raw.githubusercontent.com/roswell/roswell/v$ROSWELL_VERSION/scripts/install-for-ci.sh"
 
-  matrix:
+  jobs:
     - LISP=abcl
     - LISP=allegro
     - LISP=ccl
