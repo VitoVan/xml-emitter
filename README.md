@@ -3,6 +3,8 @@ The official repository, taken over from Peter Scott.
 
 ## Version
 
+* xml-emitter-1.1.0 (January 2020)
+  - Fix WITH-RSS2 Macro, add Travis CI and tests
 * xml-emitter-1.0.5 (November 2019)
   - Provide new Macros WITH-RSS-CHANNEL-HEADER and WITH-RSS-ITEM
 * xml-emitter-1.0.4 (September 2016)

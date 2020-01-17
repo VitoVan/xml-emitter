@@ -7,7 +7,7 @@
 
 (defsystem :xml-emitter
   :author "Peter Scott / Vito Van / Philipp Marek / Kieran Grant / Matteo Landi"
-  :version "1.0.5"
+  :version "1.1.0"
   :license "Public Domain / 0-clause MIT"
   :serial t
   :components ((:static-file "LICENSE")
