@@ -10,7 +10,7 @@
   :version "1.0.5"
   :license "Public Domain / 0-clause MIT"
   :serial t
-  :components ((:static-file "LICENCE")
+  :components ((:static-file "LICENSE")
                (:file "package")
                (:file "xml")
                (:file "rss2"))
