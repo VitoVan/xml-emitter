@@ -1,0 +1,24 @@
+language: generic
+os: linux
+
+env:
+  global:
+    - PATH=~/.roswell/bin:$PATH
+    - ROSWELL_INSTALL_DIR=$HOME/.roswell
+    - ROSWELL_VERSION=19.12.13.103
+    - ROSWELL_URL="https://raw.githubusercontent.com/roswell/roswell/v$ROSWELL_VERSION/scripts/install-for-ci.sh"
+
+  jobs:
+    - LISP=abcl
+    - LISP=allegro
+    - LISP=ccl
+    - LISP=clisp
+    - LISP=cmucl
+    - LISP=ecl
+    - LISP=sbcl
+
+install:
+  - curl -L $ROSWELL_URL | sh
+
+script:
+  - make test-ros

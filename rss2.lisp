@@ -65,7 +65,7 @@
                        :source ,source)
      ,@body))
 
-(defmacro with-rss2 ((stream &key (encoding "ISO-8859-1") (attrs '(("version" "2.0")))) &body body)
+(defmacro with-rss2 ((stream &key (encoding "ISO-8859-1") (attrs ''(("version" "2.0")))) &body body)
   `(with-xml-output (,stream :encoding ,encoding)
      (with-tag ("rss" ,attrs)
        (with-tag ("channel")
