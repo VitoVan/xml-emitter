@@ -4,7 +4,7 @@
 (in-package :xml-emitter/tests)
 
 (defmacro xml-test (name stream expected &body body)
-  "Utility macro to facilitate testing of the generted xml
+  "Utility macro to facilitate testing of the generated xml
 
   `name`, is the name of the test
   `stream`, is a stream we can use in our test to initialize xml-emitter
