@@ -9,13 +9,13 @@ env:
     - ROSWELL_URL="https://raw.githubusercontent.com/roswell/roswell/v$ROSWELL_VERSION/scripts/install-for-ci.sh"
 
   jobs:
-    - LISP=abcl
+    - LISP=abcl-bin
     - LISP=allegro
     - LISP=ccl
     - LISP=clisp
     - LISP=cmucl
     - LISP=ecl
-    - LISP=sbcl
+    - LISP=sbcl-bin
 
 install:
   - curl -L $ROSWELL_URL | sh
